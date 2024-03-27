@@ -1,24 +1,30 @@
 {
-    "name": "laravel/laravel",
+    "name": "wanderleyfa/api",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "The Api Project to my CV SaaS.",
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "owen-it/laravel-auditing": "^13.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "friendsofphp/php-cs-fixer": "^3.52",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
+        "phpstan/phpstan": "^1.10",
         "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
@@ -48,6 +54,34 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "test": [
+            "./vendor/bin/pest --order-by random"
+        ],
+        "pint": [
+            "./vendor/bin/pint"
+        ],
+        "analyse": [
+            "vendor/bin/phpstan analyse -l 6 app/Traits",
+            "vendor/bin/phpstan analyse -l 6 app/Http/Controllers/",
+            "vendor/bin/phpstan analyse -l 6 app/Http/Requests/",
+            "vendor/bin/phpstan analyse -l 6 app/Http/Resources/",
+            "vendor/bin/phpstan analyse -l 6 app/Models"
+        ],
+        "fixcode": [
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Traits",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Exceptions",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Http/Controllers/",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Http/Controllers/Api",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Http/Controllers/Api/v1",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Http/Requests/",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Http/Resources/",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Models",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes app/Repository",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes database/factories",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes database/seeders",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes tests",
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes routes"
         ]
     },
     "extra": {
